@@ -12,6 +12,7 @@ func main() {
 
 	//url routes
 	mux.HandleFunc("/login", handlers.Login)
+	mux.HandleFunc("/register", handlers.RegisterAccount)
 
 	//show the user where the server is running
 	serverAddress := "127.0.0.1:8080"

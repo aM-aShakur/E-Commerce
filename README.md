@@ -3,12 +3,8 @@ Software Engineering 2 Project
 
 # Work in Progress
 * add dropdown for login and cart buttons in the header
-
-# Make a local repo to commit new changes (needs to be done only once):
-* git init
-* git remote add origin https://github.com/aM-aShakur/E-Commerce.git
-* git fetch origin main
-* git merge origin/main
+* create, read, update and delete items in database
+* view item page
 
 # Commit new changes:
 * git add .

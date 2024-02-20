@@ -7,7 +7,6 @@ Software Engineering 2 Project
 * view item page
 * shopping cart page
 * admin page (total sales, inventory, customer/user info, add/update/delete items)
-<<<<<<< HEAD
 
 # Items to add to database later:
 
@@ -20,8 +19,7 @@ Software Engineering 2 Project
 * phone stickers
 * phones
 * speakers
-=======
->>>>>>> 4392eb43333d84981661af550a56cfc3803afdff
+
 
 # Commit new changes:
 * git add .

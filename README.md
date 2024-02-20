@@ -5,6 +5,8 @@ Software Engineering 2 Project
 * add dropdown for login and cart buttons in the header
 * create, read, update and delete items in database
 * view item page
+* shopping cart page
+* admin page (total sales, inventory, customer/user info, add/update/delete items)
 
 # Commit new changes:
 * git add .

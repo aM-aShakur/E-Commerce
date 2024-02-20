@@ -20,10 +20,10 @@ func main() {
 	fmt.Printf("Access file system on: %s/files/\n", serverAddress)
 
 	//setup the file directory for static files
-	dir := http.Dir("../frontend")
+	dir := http.Dir("../static")
 	fs := http.FileServer(dir)
 
-	//url route of static files in frontend folder
+	//url route of static files in static folder
 	mux.Handle("/files/", http.StripPrefix("/files/", fs))
 
 	//run the server

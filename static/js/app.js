@@ -39,3 +39,8 @@ async function registerAccount() {
         alert("Couldn't register account.")
     }
 }
+
+//will be used later
+async function getItem() {
+    document.getElementById("item").src = "/files/images/iphone 15 pro natural titanium.jpg"
+}

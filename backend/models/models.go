@@ -2,9 +2,13 @@ package models
 
 //represents items in the db
 type Item struct {
-	ID    string  `json:"itemID"`
-	Name  string  `json:"itemName"`
-	Price float32 `json:"itemPrice"`
+	ID            string  `json:"itemID"`
+	Name          string  `json:"itemName"`
+	Price         int     `json:"itemPrice"`
+	Description   string  `json:"itemDescription"`
+	AverageRating float32 `json:"itemAverageRating"`
+	Condition     string  `json:"itemCondition"`
+	AmountInStock int     `json:"itemAmountInStock"`
 }
 
 //represents users in the db

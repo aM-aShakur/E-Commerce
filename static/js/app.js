@@ -41,6 +41,18 @@ async function registerAccount() {
 }
 
 //will be used later
-async function getItem() {
+async function getItems() {
+    let items = []
+
     document.getElementById("item").src = "/files/images/iphone 15 pro natural titanium.jpg"
+    await fetch('http://127.0.0.1:8080/items', {
+        headers: {
+            'Accept': 'application/json'
+        }
+    })
+    .then(response => response.text())
+    .then(response => items = JSON.parse(response))
+
+    console.log("All items:", items)
+
 }

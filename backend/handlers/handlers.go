@@ -87,7 +87,7 @@ func SearchItem(w http.ResponseWriter, r *http.Request) {
 
 	//item struct for json response
 	//later will come from database query
-	item := models.Item{ID: "1", Name: "laptop", Price: 499.99}
+	item := models.Item{ID: "1", Name: "laptop", Price: 49999}
 
 	SendJSONResponse(200, w, item)
 }
@@ -187,4 +187,58 @@ func Login(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 	SendJSONResponse(200, w, user)
+}
+
+// route: /item?id=ITEM_ID
+func GetItemFromID(w http.ResponseWriter, r *http.Request) {
+	//read the item id from url
+	id := r.URL.Query().Get("id")
+
+	//using item model
+	var item models.Item
+
+	//get db connection
+	db := db.GetDBConnection()
+
+	//convert string id to sql compatible string
+	id = pq.QuoteLiteral(id)
+
+	//format query
+	query := fmt.Sprintf(`select * from items where id = %s`, id)
+
+	//attempt db query (using db.QueryRow)
+	err := db.QueryRow(query).Scan(&item.ID, &item.Name, &item.Price, &item.Description, &item.AverageRating, &item.Condition, &item.AmountInStock)
+	if err != nil {
+		fmt.Println("Failed to execute query", err)
+	}
+
+	//send item to frontend
+	SendJSONResponse(200, w, item)
+}
+
+// route: /items
+func GetItems(w http.ResponseWriter, r *http.Request) {
+	//using item model
+	var item models.Item
+
+	//array of items
+	var items = make([]models.Item, 0)
+
+	//get db connection
+	db := db.GetDBConnection()
+
+	//attempt db query
+	rows, err := db.Query(`select * from items`)
+	if err != nil {
+		fmt.Println("Failed to execute query", err)
+	}
+
+	//get the values from queried rows
+	for rows.Next() {
+		rows.Scan(&item.ID, &item.Name, &item.Price, &item.Description, &item.AverageRating, &item.Condition, &item.AmountInStock)
+		items = append(items, item)
+	}
+
+	//return array of items to frontend
+	SendJSONResponse(200, w, items)
 }

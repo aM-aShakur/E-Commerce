@@ -13,11 +13,8 @@ Software Engineering 2 Project
 * phone case
 * screen protector
 * phone magnet
-* air tags
 * power bank
-* phone charger
 * phone stickers
-* phones
 * speakers
 
 

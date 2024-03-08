@@ -1,6 +1,8 @@
 # E-Commerce
 Software Engineering 2 Project
 
+postgres://postgres.dsdyyczyauxbfgwjrwoc:[YOUR-PASSWORD]@aws-0-us-east-1.pooler.supabase.com:5432/postgres
+
 # Work in Progress
 * add dropdown for login and cart buttons in the header
 * create, read, update and delete items in database

@@ -1,8 +1,12 @@
 # E-Commerce
 Software Engineering 2 Project
 
+<<<<<<< HEAD
 # Need to make soon
 * Presentation slides showing what we have completed so far
+=======
+postgres://postgres.dsdyyczyauxbfgwjrwoc:[YOUR-PASSWORD]@aws-0-us-east-1.pooler.supabase.com:5432/postgres
+>>>>>>> 0d590617576475f5aeafa54dd01bcb46aeb31313
 
 # Work in Progress
 * add dropdown for login and cart buttons in the header

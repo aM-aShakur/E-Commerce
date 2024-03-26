@@ -55,7 +55,22 @@ async function getItems() {
 
     console.log("All items:", items)
 
+    // Assuming items is an array and each item has an id property
+    items.forEach(item => {
+        // Create a new HTML element for each item
+        var itemElement = document.createElement('div');
+        itemElement.innerHTML = item.name; // Replace with your item property
+        itemElement.onclick = function() {
+            // Redirect to the item details page with the item ID as a URL parameter
+            window.location.href = "/files/html/itemDetails.html?itemId=" + item.id;
+        }
+
+        // Add the new element to the DOM
+        document.body.appendChild(itemElement);
+    });
 }
+
+
 
 // will be used later
 async function checkout() {
@@ -77,4 +92,20 @@ async function checkout() {
     } catch {
         alert("Couldn't complete checkout.")
     }
+}
+
+
+
+// this will run when the itemDetails page loads
+window.onload = function() {
+    // Get the item ID from the URL
+    var urlParams = new URLSearchParams(window.location.search);
+    var itemId = urlParams.get('itemId');
+  
+    // Fetch the item details (you will need to implement this)
+    var itemDetails = fetchItemDetails(itemId);
+  
+    // Display the item details on the page
+    var itemDetailsDiv = document.getElementById('itemDetails');
+    itemDetailsDiv.innerHTML = JSON.stringify(itemDetails);
 }

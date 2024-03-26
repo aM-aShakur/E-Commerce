@@ -12,6 +12,8 @@ import (
 	"strconv"
 	"time"
 
+	s "strings"
+
 	"github.com/lib/pq"
 )
 
@@ -216,7 +218,7 @@ func GetItemFromID(w http.ResponseWriter, r *http.Request) {
 	SendJSONResponse(200, w, item)
 }
 
-// route: /item?name=NAME
+// route: /item?name=ITEM_NAME
 func GetItemFromName(w http.ResponseWriter, r *http.Request) {
 	//read the item name from url
 	itemName := r.URL.Query().Get("name")
@@ -227,20 +229,31 @@ func GetItemFromName(w http.ResponseWriter, r *http.Request) {
 	//get db connection
 	db := db.GetDBConnection()
 
-	var urlItemName []byte
+	var urlItemName []rune
 
 	/*
 	* creates new formated string incase
 	* there are whitespaces, in which those
 	* are changed to "-" instead as well
 	* as appeneding the rest of the characters
-	* because strings are read only
+	* lower cased
 	 */
+
 	for i := 0; i < len(itemName); i++ {
 		if itemName[i] == ' ' {
 			urlItemName = append(urlItemName, '-')
 		} else {
-			urlItemName = append(urlItemName, itemName[i])
+			//add rest of characters but lowercased
+
+			/*
+			* s.ToLower(string(itemName[i])) turns the current character
+			* into a string to lowercase it
+
+			* Then, turn the first character of that string back into
+			* a rune (character) to append it to rune array (character array)
+			* to create new formatted string for item name
+			 */
+			urlItemName = append(urlItemName, rune(s.ToLower(string(itemName[i]))[0]))
 		}
 	}
 

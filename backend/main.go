@@ -19,8 +19,12 @@ func main() {
 
 	//show the user where the server is running
 	serverAddress := "127.0.0.1:8080"
+
 	fmt.Printf("Server running on: %s\n", serverAddress)
 	fmt.Printf("Access file system on: %s/files/\n", serverAddress)
+
+	//will be removed later
+	fmt.Printf("Test item get request on: %s/item?=ITEM_NAME where you type the item's name in ITEM_NAME ", serverAddress)
 
 	//setup the file directory for static files
 	dir := http.Dir("../static")

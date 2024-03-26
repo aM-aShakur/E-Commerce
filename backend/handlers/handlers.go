@@ -207,7 +207,54 @@ func GetItemFromID(w http.ResponseWriter, r *http.Request) {
 	query := fmt.Sprintf(`select * from items where id = %s`, id)
 
 	//attempt db query (using db.QueryRow)
-	err := db.QueryRow(query).Scan(&item.ID, &item.Name, &item.Price, &item.Description, &item.AverageRating, &item.Condition, &item.AmountInStock)
+	err := db.QueryRow(query).Scan(&item.ID, &item.Name, &item.Price, &item.Description, &item.AverageRating, &item.Condition, &item.AmountInStock, &item.URLValue)
+	if err != nil {
+		fmt.Println("Failed to execute query", err)
+	}
+
+	//send item to frontend
+	SendJSONResponse(200, w, item)
+}
+
+// route: /item?name=NAME
+func GetItemFromName(w http.ResponseWriter, r *http.Request) {
+	//read the item name from url
+	itemName := r.URL.Query().Get("name")
+
+	//using item model
+	var item models.Item
+
+	//get db connection
+	db := db.GetDBConnection()
+
+	var urlItemName []byte
+
+	/*
+	* creates new formated string incase
+	* there are whitespaces, in which those
+	* are changed to "-" instead as well
+	* as appeneding the rest of the characters
+	* because strings are read only
+	 */
+	for i := 0; i < len(itemName); i++ {
+		if itemName[i] == ' ' {
+			urlItemName = append(urlItemName, '-')
+		} else {
+			urlItemName = append(urlItemName, itemName[i])
+		}
+	}
+
+	//convert urlItemName to string
+	itemName = string(urlItemName)
+
+	//convert newly formatted string newItem to sql compatible string
+	itemName = pq.QuoteLiteral(itemName)
+
+	//format query
+	query := fmt.Sprintf(`select * from items where urlvalue = %s`, itemName)
+
+	//attempt db query (using db.QueryRow)
+	err := db.QueryRow(query).Scan(&item.ID, &item.Name, &item.Price, &item.Description, &item.AverageRating, &item.Condition, &item.AmountInStock, &item.URLValue)
 	if err != nil {
 		fmt.Println("Failed to execute query", err)
 	}
@@ -235,7 +282,7 @@ func GetItems(w http.ResponseWriter, r *http.Request) {
 
 	//get the values from queried rows
 	for rows.Next() {
-		rows.Scan(&item.ID, &item.Name, &item.Price, &item.Description, &item.AverageRating, &item.Condition, &item.AmountInStock)
+		rows.Scan(&item.ID, &item.Name, &item.Price, &item.Description, &item.AverageRating, &item.Condition, &item.AmountInStock, &item.URLValue)
 		items = append(items, item)
 	}
 

@@ -13,7 +13,8 @@ func main() {
 	//url routes
 	mux.HandleFunc("/login", handlers.Login)
 	mux.HandleFunc("/register", handlers.RegisterAccount)
-	mux.HandleFunc("/item", handlers.GetItemFromID)
+	mux.HandleFunc("/item", handlers.GetItemFromName)
+	//mux.HandleFunc("/item", handlers.GetItemFromID)
 	mux.HandleFunc("/items", handlers.GetItems)
 
 	//show the user where the server is running

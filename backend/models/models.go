@@ -9,6 +9,7 @@ type Item struct {
 	AverageRating float32 `json:"itemAverageRating"`
 	Condition     string  `json:"itemCondition"`
 	AmountInStock int     `json:"itemAmountInStock"`
+	URLValue      string  `json:"itemURLValue"`
 }
 
 //represents users in the db

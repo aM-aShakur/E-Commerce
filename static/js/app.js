@@ -56,3 +56,25 @@ async function getItems() {
     console.log("All items:", items)
 
 }
+
+// will be used later
+async function checkout() {
+    let data = {
+        'item': document.getElementById("item").src,
+        'quantity': document.getElementById("quantity").value
+    }
+
+// update the url to the correct one
+    try {
+        let response = await fetch("http://example.com/checkout", {
+        method: "POST",
+        body: JSON.stringify(data),
+        headers: {
+            "Content-Type": "application/json;"
+        }
+        }).then((response => response.json()))
+        alert("Checkout successful.")
+    } catch {
+        alert("Couldn't complete checkout.")
+    }
+}
